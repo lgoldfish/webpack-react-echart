@@ -19,8 +19,8 @@ module.exports = {
                 use: [{
                     loader: 'url-loader',
                     options: {
-                        limit: 10000,
-                        name: 'img/[name].[hash:7].[ext]',
+                        limit: 1000,
+                        name: 'images/[name].[hash:7].[ext]',
                     }
                 }]
             },
@@ -34,16 +34,16 @@ module.exports = {
             //         }
             //     }]
             // },
-            {
-                test: /\.(html)$/,
-                use: {
-                    loader: "html-loader",
-                    options: {
-                        attrs: [':data-src'],
-                        minimize: true
-                    }
-                }
-            }
+            // {
+            //     test: /\.(html)$/,
+            //     use: {
+            //         loader: "html-loader",
+            //         options: {
+            //             attrs: [':data-src'],
+            //             minimize: true
+            //         }
+            //     }
+            // }
         ]
     },
     plugins: [
