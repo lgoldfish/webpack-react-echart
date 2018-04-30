@@ -1,0 +1,48 @@
+        @import "~reset.css";
+        a {
+            text-decoration: none;
+        }
+        
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            border: 0;
+            margin: 0;
+        }
+        
+        body {
+            background-image: radial-gradient(50% 17%, #222957 49%, #151934 97%);
+            font-family: 'PingFangSC-Regular';
+            font-size: 16px;
+            color: #9098B8;
+            letter-spacing: 0;
+            line-height: 24px;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            overflow-y: hidden;
+        }
+        
+        .App {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+        }
+        
+        .branch_moudle {
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .center_moudle {
+            width: 30%;
+        }
+        
+        .branch_ranking {
+            width: 22%;
+        }
+        
+        .allBranchs_moudle {
+            margin-top: 62px;
+        }
+        
+        .hotmap_container {}

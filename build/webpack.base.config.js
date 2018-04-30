@@ -1,14 +1,13 @@
 const path = require('path');
 const config = require('./config.js');
 module.exports = {
-    entry:path.resolve(__dirname,"..","src/index.js"),
+    entry: path.resolve(__dirname, "..", "src/index.js"),
     output: {
         filename: '[name].js'
     },
-    externals:{},
+    externals: {},
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
@@ -21,31 +20,33 @@ module.exports = {
                     loader: 'url-loader',
                     options: {
                         limit: 10000,
-                        name: 'img/[name].[hash:7].[ext]'
+                        name: 'img/[name].[hash:7].[ext]',
                     }
                 }]
             },
-            {
-                test: /\.(jpg|png|gif)$/,
-                use: [{
-                    loader: "file-loader",
-                    options: {
-                        name: '[path][name].[ext]'
-                    }
-                }]
-            },
+            // {
+            //     test: /\.(jpg|png|gif)$/,
+            //     use: [{
+            //         loader: "file-loader",
+            //         options: {
+            //             name: '[path][name].[ext]',
+            //             outputPath: "assets"
+            //         }
+            //     }]
+            // },
             {
                 test: /\.(html)$/,
                 use: {
                     loader: "html-loader",
                     options: {
-                        attrs: [':data-src']
+                        attrs: [':data-src'],
+                        minimize: true
                     }
                 }
             }
         ]
     },
     plugins: [
-        
+
     ]
 }
