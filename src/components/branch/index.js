@@ -1,35 +1,42 @@
 import React, {Component} from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, Switch, Route } from "react-router-dom";
 import Branch from "./Branch";
+import HisBranch from "./HisBranch";
 import "../style.css";
-// let a1png = require("../../asset/a1.png"); console.log("a1png is",a1png);
-// const a2png = require("../../asset/a2.png"); const a3png =
-// require("../../asset/a3.png"); const a4png = require("../../asset/a4.png");
-// const a5png = require("../../asset/a5.png"); const a6png =
-// require("../../asset/a6.png"); const a7png = require("../../asset/a7.png");
-// const a8png = require("../../asset/a8.png"); const a9png =
-// require("../../asset/a9.png"); const background = {
-// backgroundImage:`url(${a1png})`,     backgroundRepeat:'no-repeat',
-// backgroundSize:'100%' }
 class IndexBranch extends Component {
     constructor(props) {
         super(props)
+        this.naviCurrent = this.naviCurrent.bind(this)
+        this.naviHistory = this.naviHistory.bind(this)
     }
-    componentDidMount() {
-        console.log('2222', this.props.children)
+    state = {
+        navi:'current'
+    }
+    naviCurrent(){
+        this.setState({
+            navi:"current"
+        })
+    }
+    naviHistory(){
+        this.setState({
+            navi:"history"
+        })
     }
     render() {
+        const {navi} = this.state;
         return (
             <div>
                 分馆客流趋势：
-                <NavLink exact className="navLink" to="/brach/current">
+                <div  className={navi=='current'?'acitveLink':'navLink'} onClick={this.naviCurrent}>
                     当天
-                </NavLink>
-                <NavLink className="navLink" activeClassName="acitveLink" to="/branch/history">
+                </div>
+                <div className={navi=='current'?'navLink':'acitveLink'} onClick={this.naviHistory}>
                     历史
-                </NavLink>
+                </div>
                 <div className="branchs_container">
-                  <Branch/>
+                {
+                  navi === 'current'?<Branch/>:<HisBranch/>
+                }
                 </div>
             </div>
         )

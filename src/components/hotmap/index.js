@@ -1,26 +1,45 @@
 import React ,{ Component } from "react";
-import {NavLink} from "react-router-dom";
-import NGRMap from "./NGRMap";
 import "../style.css";
-class Hotmap extends Component {
-    constructor(props){
+import Hotmap from "./Hotmap";
+import HisHotmap from "./HisHotmap";
+class HotmapMoudle extends Component {
+    constructor(props) {
         super(props)
+        this.naviCurrent = this.naviCurrent.bind(this)
+        this.naviHistory = this.naviHistory.bind(this)
     }
-    componentDidMount(){
-        window.ngrMap = new NGRMap();   
-        ngrMap.initMap();    
-
+    state = {
+        navi:'current'
+    }
+    naviCurrent(){
+        this.setState({
+            navi:"current"
+        })
+    }
+    naviHistory(){
+        this.setState({
+            navi:"history"
+        })
     }
     render(){
+        const {navi} = this.state;
         return (
             <div>
-                <NavLink exact className="navLink" to="/hotmap/current" >   实时热力 </NavLink>
-                <NavLink className="navLink" activeClassName="acitveLink" to="/hotmap/history" >  轨迹查询</NavLink>
-                 <div className="hotmap_container" id="hotmap">
-
-                 </div>
+                 <div  className={navi=='current'?'acitveLink-hotmap':'navLink'}  onClick={this.naviCurrent}>
+                      实时热力
+                </div>
+                <div className={navi=='current'?'navLink':'acitveLink-hotmap'}  onClick={this.naviHistory}>
+                    轨迹查询
+                </div>
+                <div className="branchs_container">
+                <div className="hotmap_container">
+                {
+                  navi === 'current'?<Hotmap/>:<HisHotmap/>
+                }
+                </div>
+                </div>
             </div>
         )
     }
 }
-export default Hotmap;
+export default HotmapMoudle;

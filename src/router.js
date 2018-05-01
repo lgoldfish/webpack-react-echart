@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, history,Route,IndexRoute} from "react-router-dom";
+import {BrowserRouter as Router, history,Route} from "react-router-dom";
 import App from "./App";
 import IndexBranch from "./components/branch/index";
 import Branch from "./components/branch/Branch"

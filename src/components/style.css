@@ -3,6 +3,25 @@
     color: #67FEDB;
     letter-spacing: 0;
     line-height: 24px;
+    display: inline-block;
+    margin-right: 15px;
+    border-bottom: 2px solid #67FEDB;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.acitveLink-hotmap {
+    font-size: 20px;
+    color: #FFCE4D;
+    letter-spacing: 0;
+    line-height: 24px;
+    display: inline-block;
+    margin-right: 15px;
+    border-bottom: 2px solid #FFCE4D;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .navLink {
@@ -11,10 +30,18 @@
     letter-spacing: 0;
     line-height: 24px;
     border-bottom: 0;
+    display: inline-block;
+    margin-right: 15px;
+    border-bottom: 1px solid #0A0D1E;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .branchs_container {
     margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .branchs_container ul {
@@ -110,7 +137,7 @@
     height: 300px;
     padding: 20px;
     /* border: 0.3px solid #FFFFFF; */
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     box-sizing: border-box;
     padding: 20px;
 }

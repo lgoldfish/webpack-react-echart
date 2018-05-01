@@ -1,24 +1,43 @@
 import React, {Component} from "react";
-import {NavLink} from "react-router-dom";
-import echarts from "echarts";
-import options from "./branchsOptions";
+import Branchs from "./Branchs";
+import HisBranchs from "./HisBranchs";
 import "../style.css";
 class BranchsAll extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
+        this.naviCurrent = this.naviCurrent.bind(this)
+        this.naviHistory = this.naviHistory.bind(this)
+    }
+    state = {
+        navi:'current'
+    }
+    naviCurrent(){
+        this.setState({
+            navi:"current"
+        })
+    }
+    naviHistory(){
+        this.setState({
+            navi:"history"
+        })
     }
     componentDidMount(){
-        const branchsall = echarts.init(this.refs.branchall);
-        branchsall.setOption(options);
     }
     render(){
+        const {navi} = this.state;
         return (
             <div>
                 总馆客流趋势：
-                 <NavLink exact className="navLink" to="/branchsall/current" >  当天 </NavLink>
-                <NavLink className="navLink" activeClassName="acitveLink" to="/branchsall/history" >  历史</NavLink>
+                <div  className={navi=='current'?'acitveLink':'navLink'} onClick={this.naviCurrent}>
+                    当天
+                </div>
+                <div className={navi=='current'?'navLink':'acitveLink'} onClick={this.naviHistory}>
+                    历史
+                </div>
                  <div className="branchsall_container" ref="branchall">
-
+                 {
+                  navi === 'current'?<Branchs/>:<HisBranchs/>
+                }
                  </div>
             </div>
         )       

@@ -2,8 +2,8 @@ import Style from "./mapStyle";
 let defaultOptions = {
     style:Style,
     container:"hotmap",
-    zoom:19,
-    center:[114.602832194871, 38.1199808071655]
+    zoom:22,
+    center:[120.222804117144, 29.1161798746041]
 }
 class NgrMap extends  mapboxgl.Evented {
   constructor() {
