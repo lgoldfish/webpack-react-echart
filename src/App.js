@@ -1,23 +1,23 @@
 import React , { Component } from "react";
-import Branch from "./components/branch/index";
+import IndexBranch from "./components/branch/index";
 import Hotmap from "./components/hotmap/index";
 import Ranking from "./components/ranking/index";
 import BranchsAll from "./components/branchsall/index";
-console.log(BranchsAll)
+import Branch from "./components/branch/Branch";
 import "./app.css";
 class App extends Component {
     constructor(props) {
         super(props)
     }
     componentDidMount() {
-
+        console.log(this.props)
     }
 
     render() {
         return (
             <div className="App">
                 <div className="branch_moudle" >
-                    <Branch/>
+                    <IndexBranch/>
                 </div>
                 <div className="center_moudle">
                     <div className="hotmap_moudle">
