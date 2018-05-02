@@ -39,6 +39,10 @@ module.exports = webpackMerge(base, {
             template:path.resolve(__dirname,"..","public/index.html"),
             inject:true,
             filename:"index.html"
-        })
+        }),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, "..", "public"),
+            ignore: ['.*', 'index.html']
+        }]),
     ]
 });

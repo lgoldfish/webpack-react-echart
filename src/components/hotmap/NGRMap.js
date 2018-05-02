@@ -1,40 +1,80 @@
-import Style from "./mapStyle";
-let defaultOptions = {
-    style:Style,
-    container:"hotmap",
-    zoom:22,
-    center:[120.222804117144, 29.1161798746041]
-}
-class NgrMap extends  mapboxgl.Evented {
+class NGRMap  {
   constructor() {
-    super();
+    this.appkey = "0fd2ce4e3da444b3bc1d2fea3bda5c25";
+    this.zoom = 15.9;
   }
-  async initMap(options){
-    let o ;
-    if(options){
-      o = {...defaultOptions,...options}
-    }else{
-      o = defaultOptions
-    }
-    this.mapView = new mapboxgl.Map(o)
+  initMap() {
+    this.map = new NGR.View('map', {
+      AppKey: this.appkey,
+      server: 'https://api.ipalmap.com',
+      dragging: false,
+      touchZoom: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      boxZoom: false
+    })
+    this.map.setZoom(16);
+    const res =new  NGR.DataSource({
+      AppKey: this.appkey,
+      server: 'https://api.ipalmap.com'
+    })
+    res
+      .requestMaps()
+      .then( (maps)=> {
+        res
+          .requestPOIChildren(maps.list[0].poi)
+          .then((floors)=> {
+            return res
+              .requestPlanarGraph(floors[0].id)
+              .then((layerInfo)=> {
+                this._addLayer(layerInfo)
+              });
+          });
+      })
+      .fail(function (e) {
+        return console.error(e, e.stack);
+      });
+
+      this.map._core_map.whenReady(()=>{
+        this.map.setZoom(this.zoom);
+      })
+
   }
-  async changeFloor(mapInfo,checkpage){
-    if(mapInfo){
-      const {floorid , center} = {...mapInfo}
-      let Style = this.mapView.getStyle()
-      // if(checkpage == "checkpage"){
-        Style.sources.Area.data = `${Api.mapApi}/PoiInfo/${floorid}/changedarea`
-      // }else{
-        // Style.sources.Area.data = `${Api.mapApi}/PoiInfo/${floorid}/area`
-      // }
-      Style.sources.Frame.data = `${Api.mapApi}/PoiInfo/${floorid}/frame`
-      Style.sources.Facility.data = `${Api.mapApi}/PoiInfo/${floorid}/facility`
-      this.mapView.setStyle(Style)
-      this.mapView.setCenter(center)
-      this.mapView.resize();
-    }else {
-      this.mapView.setCenter([0,0])
-    }
+  _addLayer(layerInfo){
+
+    return NGR.IO.fetch({
+              url: "./hotmap/style.json",  
+              onsuccess: JSON.parse
+          }).then((style)=> { 
+              const frame = NGR.featureLayer(layerInfo, { 
+                  layerType: 'Frame',
+                  styleConfig: style
+              });
+              const area = NGR.featureLayer(layerInfo, { 
+                  layerType: 'Area',
+                  styleConfig: style
+              });
+              // const annotation = NGR.featureLayer(layerInfo.Area, {
+              //   layerType: "LogoLabel",
+              //   styleConfig: style
+              // });
+              // const collision = NGR.layerGroup.collision({
+              //   margin: 3
+              // });
+              // collision.addLayer(annotation);i
+              this.map.addLayer(frame);
+              this.map.addLayer(area);
+              this.map.render(); 
+              this._handleOnclik(area);
+          });
+      
+  }
+  _handleOnclik(layers){
+    layers.eachLayer((layer)=>{
+      layer.on('click',(e)=>{
+        console.log('click',e.target.feature)
+      })
+    })
   }
 }
-export default NgrMap 
+export default NGRMap;

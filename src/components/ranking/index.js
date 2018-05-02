@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import {connect} from "react-redux";
 import Ranking from "./Ranking";
 import HisRanking from "./HisRanking";
+import TrailList from "../hotmap/TrailList";
 import "../style.css";
 class RankingMoudel extends Component {
     constructor(props) {
@@ -9,7 +11,8 @@ class RankingMoudel extends Component {
         this.naviHistory = this.naviHistory.bind(this)
     }
     state = {
-        navi:'current'
+        navi:'current',
+        trailShow:false
     }
     naviCurrent(){
         this.setState({
@@ -21,17 +24,36 @@ class RankingMoudel extends Component {
             navi:"history"
         })
     }
+    componentWillReceiveProps(nextProps){
+        console.log('ranking nextProps redux',nextProps)
+        if(nextProps.trailShow){
+            this.setState({
+                trailShow:true
+            })
+        }else{
+            this.setState({
+                trailShow:false
+            })
+        }
+    }
+    componentDidMount(){
+        this.setState({
+            trailShow:this.props.trailShow
+        })
+    }
     render() {
-        const {navi} = this.state;
+        const {navi,trailShow} = this.state;
         return (
             <div>
-                分馆客流排名：
-                <div  className={navi=='current'?'acitveLink':'navLink'} onClick={this.naviCurrent}>
-                    当天
-                </div>
-                <div className={navi=='current'?'navLink':'acitveLink'} onClick={this.naviHistory}>
-                    历史
-                </div>
+                {trailShow?<div className="trail_title">轨迹</div>:<div>
+                    分馆客流排名：
+                    <div  className={navi=='current'?'acitveLink':'navLink'} onClick={this.naviCurrent}>
+                        当天
+                    </div>
+                    <div className={navi=='current'?'navLink':'acitveLink'} onClick={this.naviHistory}>
+                        历史
+                    </div>
+                </div>}
                 <div className="ranking_container">
                 {
                   navi === 'current'?<Ranking/>:<HisRanking/>
@@ -51,4 +73,9 @@ class RankingMoudel extends Component {
         )
     }
 }
-export default RankingMoudel;
+const mapStateToProps = (state)=>{
+    return {
+        trailShow:state.showTrailReducer.show
+    }
+}
+export default connect(mapStateToProps)(RankingMoudel);

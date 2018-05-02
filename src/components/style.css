@@ -57,6 +57,7 @@
     background: url("../asset/bg_480x500.png");
     background-size: 100% auto;
     background-repeat: no-repeat;
+    position: relative;
 }
 
 .branchsall_container {
@@ -185,4 +186,54 @@
 
 .branchs_container ul li:nth-of-type(9) {
     background: url("../asset/e3.png")
+}
+
+.ngr-container {
+    background: transparent;
+    outline: 0;
+}
+
+.ngr-control-container {
+    display: none;
+}
+
+.trailSearch {
+    display: inline-block;
+    position: relative;
+}
+
+.trailSearch input {
+    width: 260px;
+    height: 30px;
+    border: 1px solid #224978;
+    display: inline-block;
+    background: transparent;
+    border-radius: 15px;
+    text-indent: 35px;
+    font-size: 16px;
+    color: snow;
+}
+
+.trailSearch img {
+    width: 25px;
+    position: absolute;
+    left: 7px;
+    top: 3px;
+}
+
+.trailSearch img:hover {
+    cursor: pointer;
+}
+
+.trail_title {
+    font-size: 16px;
+    color: #9098B8;
+    letter-spacing: 0;
+    line-height: 24px;
+    display: inline-block;
+    margin-right: 15px;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
 }

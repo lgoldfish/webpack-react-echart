@@ -1,7 +1,8 @@
 import React ,{ Component } from "react";
+import {connect} from "react-redux";
 import "../style.css";
 import Hotmap from "./Hotmap";
-import HisHotmap from "./HisHotmap";
+import TrailShow from "./TrailShow";
 class HotmapMoudle extends Component {
     constructor(props) {
         super(props)
@@ -9,17 +10,29 @@ class HotmapMoudle extends Component {
         this.naviHistory = this.naviHistory.bind(this)
     }
     state = {
-        navi:'current'
+        navi:'history'
     }
     naviCurrent(){
         this.setState({
             navi:"current"
+        })
+        this.props.dispatch({
+            type:"hide_trail"
         })
     }
     naviHistory(){
         this.setState({
             navi:"history"
         })
+        this.props.dispatch({
+            type:"show_trail"
+        })
+    }
+    handleInput(e){
+        console.log(e.target.value)
+    }
+    componentDidMount(){
+        console.log('redux props',this.props)
     }
     render(){
         const {navi} = this.state;
@@ -31,10 +44,17 @@ class HotmapMoudle extends Component {
                 <div className={navi=='current'?'navLink':'acitveLink-hotmap'}  onClick={this.naviHistory}>
                     轨迹查询
                 </div>
+                {
+                    navi==='history'?
+                    <div className="trailSearch">
+                     <img src={require('../../asset/ic_search.png')} alt="search"/>
+                        <input type="text" onChange={this.handleInput.bind(this)}  placeholder="13914689223"/>
+                    </div>:''
+                }
                 <div className="branchs_container">
                 <div className="hotmap_container">
                 {
-                  navi === 'current'?<Hotmap/>:<HisHotmap/>
+                  navi === 'current'?<Hotmap/>:<TrailShow/>
                 }
                 </div>
                 </div>
@@ -42,4 +62,9 @@ class HotmapMoudle extends Component {
         )
     }
 }
-export default HotmapMoudle;
+const mapStateToProps = (state)=>{
+    return {
+        show:state.showTrailReducer.show
+    }
+}
+export default connect(mapStateToProps)(HotmapMoudle);
