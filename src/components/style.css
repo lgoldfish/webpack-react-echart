@@ -47,7 +47,7 @@
 .branchs_container ul {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: start;
 }
 
 .hotmap_container {
@@ -69,8 +69,6 @@
     background-repeat: no-repeat;
 }
 
-.ranking_top {}
-
 .hotmap_moudle {
     height: 495px;
     width: 100%;
@@ -78,6 +76,7 @@
 
 .ranking_top {
     height: 650px;
+    overflow-y: auto;
 }
 
 .ranking_middle {
@@ -234,6 +233,37 @@
     margin-right: 15px;
     border-bottom: 2px solid transparent;
     padding-bottom: 3px;
-    padding-left: 10px;
     padding-right: 10px;
+}
+
+.trail_list {
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.trail_list li {
+    border-left: 1px solid#FF654D;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    color: #FF654D;
+    letter-spacing: 0;
+    font-weight: 100!important;
+}
+
+.trail_list li span {
+    padding-right: 15px;
+}
+
+.trail_list li div {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #FF654D;
+    border-radius: 8px;
+    position: absolute;
+    left: -8px;
+    top: 12px;
+    background: #10132E;
 }

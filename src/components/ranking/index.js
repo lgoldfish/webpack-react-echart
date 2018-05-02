@@ -56,7 +56,11 @@ class RankingMoudel extends Component {
                 </div>}
                 <div className="ranking_container">
                 {
-                  navi === 'current'?<Ranking/>:<HisRanking/>
+                   trailShow?<TrailList/>: <div>
+                        {
+                         navi === 'current'?<Ranking/>:<HisRanking/>
+                        }
+                    </div>
                 }
                     <div className="ranking_middle">
                         <div>今日全馆累计人数：<span>35789</span></div>
@@ -64,7 +68,7 @@ class RankingMoudel extends Component {
                         <div>全馆累计人数：<span>886542</span></div>
                     </div>
                     <div className="ranking_bottom">
-                    <img src="" alt=""/>
+                    <img src={require("../../asset/logo.png")} alt="logo"/>
                         石家庄国际会展中心
                         {/* <img src={require("../../asset/a10.png")} alt=""/> */}
                     </div>

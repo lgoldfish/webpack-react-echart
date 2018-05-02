@@ -8,11 +8,12 @@ export default {
     grid: {
         left: '2%',
         right: '2%',
-        bottom: '3%',
+        bottom: '1%',
         top:"3%",
         containLabel: true
     },
     xAxis: {
+        show:false,
         type: 'value',
         boundaryGap: [0, 0.01],
         splitLine:{
@@ -54,6 +55,12 @@ export default {
             data: [18203, 23489, 29034, 104970, 131744, 630230,12323,343434,43434],
             itemStyle:{
                 color:"#3582F3 "
+            },
+            label:{
+                show:true,
+                // rotate:20,
+                position:"right",
+                color:"#ffffff"
             }
         },
         
