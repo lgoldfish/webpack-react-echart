@@ -26,7 +26,7 @@ class IndexBranch extends Component {
         const {navi} = this.state;
         return (
             <div>
-                分馆客流趋势：
+               <span className="branch_title">分馆客流趋势：</span> 
                 <div  className={navi=='current'?'acitveLink':'navLink'} onClick={this.naviCurrent}>
                     当天
                 </div>
