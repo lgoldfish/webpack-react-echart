@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import echarts from "echarts";
 import branchOption  from "./branchOptions";
-console.log('branchOption',branchOption)
-import "../style.css";
 class Branch extends Component {
     constructor(props) {
         super(props)

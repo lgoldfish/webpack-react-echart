@@ -1,0 +1,7 @@
+{
+    "targetPath": "sjzhz",
+    "version": "",
+    "bucket": "palmap-bi",
+    "uploadDir": "dist",
+    "baseUrl": "http://bi.ipalmap.com"
+}

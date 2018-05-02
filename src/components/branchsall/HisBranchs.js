@@ -1,16 +1,18 @@
-import React , {Component } from "react";
-import "../style.css";
+import React, {Component} from "react";
+import echarts from "echarts";
+import options from "./branchsOptions";
 class HisBranchs extends Component {
-    constructor(){
+    constructor() {
         super()
     }
-    componentDidMount(){
-
+    componentDidMount() {
+        const branchsall = echarts.init(this.refs.branchall);
+        branchsall.setOption(options);
     }
-    render(){
+    render() {
         return (
             <div>
-                HisBranchs
+                <div className="branchsall_container" ref="branchall"></div>
             </div>
         )
     }

@@ -1,25 +1,27 @@
 export default {
     xAxis: {
         type: 'category',
-        show:false,
+        show:true,
         boundaryGap: false,
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        data: ['00', '01', '02', '03', '04', '05', '06','07','08','09','10','11','12',
+                '13','14','15','16','17','18','19','20','21','22','23'],
         axisLabel:{
             color:'#ffffff'
         }
     },
     grid:{
-        right:'1.5%',
-        bottom:'2%',
+        right:'5%',
+        bottom:'10%',
         top:'2%',
-        left:"1.5%"
+        left:"20%"
     },
     yAxis: {
-        show:false,
+        show:true,
         type: 'value',
         splitLine:{
             show:false
         },
+        data:[800,900,1000,1100],
         axisLabel:{
             color:"#ffffff"
         }

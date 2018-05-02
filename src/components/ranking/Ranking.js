@@ -1,8 +1,6 @@
 import React, {Component} from "react";
-import {NavLink} from "react-router-dom";
 import echarts from "echarts";
 import options from "./rankOptions";
-import "../style.css";
 class Ranking extends Component {
     constructor(props) {
         super(props)
