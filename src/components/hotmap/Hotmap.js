@@ -8,7 +8,7 @@ class Hotmap extends Component {
     componentDidMount() {
         window.ngrMap = new NGRMap();
         ngrMap.initMap();
-        // console.log('NGR is',NGR)
+        ngrMap.addHeatMapLayer();
     }
     render() {
         return (

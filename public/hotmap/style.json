@@ -4,8 +4,8 @@
         "common": {
             "style": {
                 "color": "#ffffff",
-                "weight": 1,
-                "opacity": 1,
+                "weight": 5,
+                "opacity": 0.5,
                 "fillColor": "transparent",
                 "fillOpacity": 1,
                 "lineCap": null,
@@ -20,8 +20,8 @@
         "common": {
             "style": {
                 "color": "#ffffff",
-                "weight": 0.8,
-                "opacity": 1,
+                "weight": 0.5,
+                "opacity": 0,
                 "fillColor": "#F4F4EF",
                 "fillOpacity": 1,
                 "lineCap": null,
@@ -33,12 +33,19 @@
         "filter": [{
             "property": "category",
             "values": {
-                "37000000": { "fillColor": "red" },
-                "12010000": { "fillColor": "yellow" },
-                "35002000": { "fillColor": "pink" },
-                "22001000": { "fillColor": "green" },
-                "23999000": { "fillColor": "blue" },
-                "23043000": { "fillColor": "#ffffff" }
+                "37000000": { "fillColor": "#415493" },
+                "12010000": { "fillColor": "#273B63" },
+                "35002000": { "fillColor": "#576CAC" },
+                "22001000": { "fillColor": "#3F698B" },
+                "23999000": { "fillColor": "#415493" },
+                "23043000": { "fillColor": "#273B63" },
+                "24097000": { "fillColor": "#273B63" },
+                "23001000": { "fillColor": "#576CAC" },
+                "23063000": { "fillColor": "#273B63" },
+                "23027000": { "fillColor": "#273B63" },
+                "24093000": { "fillColor": "#273B63" },
+                "24091000": { "fillColor": "#273B63" },
+                "23038000": { "fillColor": "#273B63" }
             }
         }]
     },

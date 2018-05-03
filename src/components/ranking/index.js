@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import Ranking from "./Ranking";
 import HisRanking from "./HisRanking";
 import TrailList from "../hotmap/TrailList";
+import request from "../../server";
+import {apiUsersCount} from "../../config";
 import "../style.css";
 class RankingMoudel extends Component {
     constructor(props) {
@@ -12,7 +14,9 @@ class RankingMoudel extends Component {
     }
     state = {
         navi:'current',
-        trailShow:false
+        trailShow:false,
+        usersCurrent:0,
+        usersHistory:0
     }
     naviCurrent(){
         this.setState({
@@ -40,9 +44,23 @@ class RankingMoudel extends Component {
         this.setState({
             trailShow:this.props.trailShow
         })
+       this.requestData()
+       setInterval(()=>{
+        this.requestData();
+       },1000*60)
+    }
+    requestData(){
+        request(apiUsersCount).then(count=>{
+            this.setState({
+                usersCurrent:count.currentUsers,
+                usersHistory:count.historyUsers,
+            })
+        }).then(error=>{
+            console.log(error)
+        })
     }
     render() {
-        const {navi,trailShow} = this.state;
+        const {navi,trailShow,usersCurrent,usersHistory} = this.state;
         return (
             <div>
                 {trailShow?<div className="trail_title">轨迹</div>:<div>
@@ -63,14 +81,13 @@ class RankingMoudel extends Component {
                     </div>
                 }
                     <div className="ranking_middle">
-                        <div>今日全馆累计人数：<span>35789</span></div>
+                        <div>今日全馆累计人数：<span>{usersCurrent}</span></div>
                         <div className="line-x"></div>
-                        <div>全馆累计人数：<span>886542</span></div>
+                        <div>全馆累计人数：<span>{usersHistory}</span></div>
                     </div>
                     <div className="ranking_bottom">
                     <img src={require("../../asset/logo.png")} alt="logo"/>
                         石家庄国际会展中心
-                        {/* <img src={require("../../asset/a10.png")} alt=""/> */}
                     </div>
                 </div>
             </div>

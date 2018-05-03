@@ -5,6 +5,7 @@ import {createStore} from "redux";
 import reducers from "./models/hotmapModel";
 import Routes from "./router";
 import css from "./app.css";
+import "whatwg-fetch";
 const store = createStore(reducers);
 ReactDOM.render(
     <Provider store={store}>

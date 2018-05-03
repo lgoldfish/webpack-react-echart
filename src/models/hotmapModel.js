@@ -14,7 +14,7 @@ const HIDE_TRAIL = "hide_trail";
 //     }
 // }
 const initialState = {
-    show: true
+    show: false
 }
 let showTrailReducer = (state = initialState, action) => {
     switch (action.type) {

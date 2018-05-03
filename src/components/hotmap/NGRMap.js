@@ -7,9 +7,9 @@ class NGRMap  {
     this.map = new NGR.View('map', {
       AppKey: this.appkey,
       server: 'https://api.ipalmap.com',
-      dragging: false,
+      // dragging: false,
       touchZoom: false,
-      scrollWheelZoom: false,
+      // scrollWheelZoom: false,
       doubleClickZoom: false,
       boxZoom: false
     })
@@ -46,26 +46,37 @@ class NGRMap  {
               url: "./hotmap/style.json",  
               onsuccess: JSON.parse
           }).then((style)=> { 
-              const frame = NGR.featureLayer(layerInfo, { 
-                  layerType: 'Frame',
-                  styleConfig: style
-              });
-              const area = NGR.featureLayer(layerInfo, { 
-                  layerType: 'Area',
-                  styleConfig: style
-              });
-              // const annotation = NGR.featureLayer(layerInfo.Area, {
-              //   layerType: "LogoLabel",
-              //   styleConfig: style
-              // });
-              // const collision = NGR.layerGroup.collision({
-              //   margin: 3
-              // });
-              // collision.addLayer(annotation);i
-              this.map.addLayer(frame);
-              this.map.addLayer(area);
-              this.map.render(); 
-              this._handleOnclik(area);
+            this.style = style;
+                // NGR.IO.fetch({
+                //   url:"./hotmap/trail.json",
+                //   onsuccess:JSON.parse
+                // })
+                // .then(trail=>{
+                  // console.log('trail is',trail)
+                  this.map.clear();
+                  const frame = NGR.featureLayer(layerInfo, { 
+                    layerType: 'Frame',
+                    styleConfig: style
+                });
+                  const area = NGR.featureLayer(layerInfo, { 
+                      layerType: 'Area',
+                      styleConfig: style
+                  });
+                  const collision = NGR.layerGroup.collision({
+                    margin: 3
+                });
+                  // const trailLayer =  NGR.featureLayer(trail,{
+                  //   layerType:"Navi",
+                  //   styleConfig:style
+                  // })
+                  // console.log('tailLayer is',trailLayer)
+                  this.map.addLayer(frame);
+                  this.map.addLayer(area);
+                  this.map.addLayer(collision);
+                  // this.map.addLayer(trailLayer)
+                  this.map.render(); 
+                  this._handleOnclik(area);
+                // })
           });
       
   }
@@ -73,6 +84,20 @@ class NGRMap  {
     layers.eachLayer((layer)=>{
       layer.on('click',(e)=>{
         console.log('click',e.target.feature)
+      })
+    })
+  }
+  addHeatMapLayer(){
+    this.map._core_map.whenReady(()=>{
+      NGR.IO.fetch({
+        url:"./hotmap/heatmap.json",
+        onsuccess:JSON.parse
+      }).then(heatmap=>{
+        const heatmapLayer = NGR.featureLayer(heatmap,{
+          layerType:"Heatmap",
+          styleConfig:this.style
+        })
+        this.map.addLayer(heatmapLayer);
       })
     })
   }

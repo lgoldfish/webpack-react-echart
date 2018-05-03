@@ -1,4 +1,5 @@
 export default {
+    // backgroundColor:"red",
     tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -34,7 +35,7 @@ export default {
         splitArea:{
             show:true,
             areaStyle:{
-                color:"#080B20"
+                color:"transparent"
             }
 
         }
@@ -44,7 +45,7 @@ export default {
             type: 'bar',
             data: [1317443, 1317443, 1317443, 1317443, 1317443, 1317443,1317443,1317443,1317443],
             itemStyle:{
-                color:"##080B20"
+                color:"#080B20"
             },
             barGap:'-100%',
             barCategoryGap:'40%',
@@ -54,7 +55,19 @@ export default {
             type: 'bar',
             data: [18203, 23489, 29034, 104970, 131744, 630230,12323,343434,43434],
             itemStyle:{
-                color:"#3582F3 "
+                color:{
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 1,
+                    y2: 0,
+                    colorStops: [{
+                        offset: 0, color: '#3582F3' 
+                    }, {
+                        offset: 1, color: '#85C1FF' 
+                    }],
+                    globalCoord: false 
+                }
             },
             label:{
                 show:true,
