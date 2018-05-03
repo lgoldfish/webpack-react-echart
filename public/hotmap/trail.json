@@ -1,32 +1,30 @@
 {
+    "type": "FeatureCollection",
     "features": [{
-            "geometry": {
-                "coordinates": [
-                    [12757982.961099997, 4596555.5909],
-                    [12757769.741800003, 4596585.2874]
-                ],
-                "type": "LineString"
-            },
-            "properties": {
-                "hasTransitPoint": false,
-                "planar_graph": 3663076
-            },
-            "type": "Feature"
+        "type": "Feature",
+        "properties": {
+            "planar_graph": 3663076,
+            "hasTransitPoint": false
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    [12757982.961099997, 4596555.5909],
-                    [12758061.192599997, 4596617.0978999995]
-                ],
-                "type": "LineString"
-            },
-            "properties": {
-                "hasTransitPoint": false,
-                "planar_graph": 3663076
-            },
-            "type": "Feature"
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [
+                [12757982.961099997, 4596555.5909],
+                [12757769.741800003, 4596585.2874]
+            ]
         }
-    ],
-    "type": "FeatureCollection"
+    }, {
+        "type": "Feature",
+        "properties": {
+            "planar_graph": 3663076,
+            "hasTransitPoint": false
+        },
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [
+                [12757982.961099997, 4596555.5909],
+                [12758061.192599997, 4596617.0978999995]
+            ]
+        }
+    }]
 }

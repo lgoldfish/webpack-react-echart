@@ -9,6 +9,9 @@ class Hotmap extends Component {
         window.ngrMap = new NGRMap();
         ngrMap.initMap();
         ngrMap.addHeatMapLayer();
+        // setInterval(()=>{
+        //     ngrMap.addHeatMapLayer();
+        // },1000*60)
     }
     render() {
         return (

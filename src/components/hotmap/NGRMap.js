@@ -101,5 +101,22 @@ class NGRMap  {
       })
     })
   }
+  addTrailLine(){
+    this.map._core_map.whenReady(()=>{
+      const routineLayer = NGR.layerGroup();
+      routineLayer.addTo(this.map);
+      NGR.IO.fetch({
+        url:"./hotmap/trail.json",
+        onsuccess:JSON.parse
+      }).then(trail=>{
+        console.log('trail',trail)
+        const trailLayer = NGR.featureLayer(trail,{
+          layerType:"Navi",
+          styleConfig:this.style
+        })
+        routineLayer.addLayer(trailLayer)
+      })
+    })
+  }
 }
 export default NGRMap;

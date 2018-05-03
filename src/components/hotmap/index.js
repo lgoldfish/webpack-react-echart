@@ -10,7 +10,7 @@ class HotmapMoudle extends Component {
         this.naviHistory = this.naviHistory.bind(this)
     }
     state = {
-        navi:'current'
+        navi:'history'
     }
     naviCurrent(){
         this.setState({

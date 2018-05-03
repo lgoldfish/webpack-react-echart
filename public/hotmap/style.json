@@ -169,10 +169,10 @@
         "type": "MultiLineString",
         "common": {
             "style": {
-                "color": "#7db51b",
-                "weight": 2,
+                "color": "#ffffff",
+                "weight": 10,
                 "opacity": 1,
-                "fillColor": "#7db51b",
+                "fillColor": "#ffffff",
                 "fillOpacity": 1,
                 "lineCap": "round",
                 "lineJoin": "round",
