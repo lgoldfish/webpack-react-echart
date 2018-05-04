@@ -1,3 +1,5 @@
+import {apiHeatmap} from "../../config";
+import request from "../../server";
 class NGRMap  {
   constructor() {
     this.appkey = "0fd2ce4e3da444b3bc1d2fea3bda5c25";
@@ -89,17 +91,29 @@ class NGRMap  {
   }
   addHeatMapLayer(){
     this.map._core_map.whenReady(()=>{
-      NGR.IO.fetch({
-        url:"./hotmap/heatmap.json",
-        onsuccess:JSON.parse
-      }).then(heatmap=>{
+      request(apiHeatmap)
+      .then((heatmap=>{
         const heatmapLayer = NGR.featureLayer(heatmap,{
           layerType:"Heatmap",
           styleConfig:this.style
         })
 
         this.map.addLayer(heatmapLayer);
+      }))
+      .catch(error=>{
+        console.log(error)
       })
+      // NGR.IO.fetch({
+      //   url:"./hotmap/heatmap.json",
+      //   onsuccess:JSON.parse
+      // }).then(heatmap=>{
+      //   const heatmapLayer = NGR.featureLayer(heatmap,{
+      //     layerType:"Heatmap",
+      //     styleConfig:this.style
+      //   })
+
+      //   this.map.addLayer(heatmapLayer);
+      // })
     })
   }
   addTrailLine(){
@@ -108,15 +122,12 @@ class NGRMap  {
         url:"./hotmap/trail.json",
         onsuccess:JSON.parse
       }).then(trail=>{
-        console.log('trail',trail)
-        console.log('style',this.style)
         try {
           const trailLayer = NGR.featureLayer(trail,{
             layerType:"Navi",
             styleConfig:this.style
           })
-          console.log('traiLayer',trailLayer);
-          // this.map.addLayer(trailLayer)
+          this.map.addLayer(trailLayer)
         } catch (error) {
           console.error("error",error)
         }

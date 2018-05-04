@@ -1,27 +1,33 @@
 import React, {Component} from 'react';
-
+import {connect} from "react-redux";
 class TrailList extends Component {
     constructor(){
         super()
     }
     state={
         trailList:[
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
+            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
         ]
     }
     componentDidMount(){
 
+    }
+    componentWillReceiveProps(nextProps){
+        const {trailList} = nextProps;
+        nextProps.trailList && this.setState({
+            trailList
+        })
     }
     render(){
         return(
@@ -32,9 +38,9 @@ class TrailList extends Component {
                             return (
                                 <li key={i}>
                                 <div></div>
-                                <span>2018/3/23</span>
-                                <span>15:30</span>
-                                <span>A2馆</span>
+                                <span>{val.date}</span>
+                                <span>{val.time}</span>
+                                <span>{val.libraries}</span>
                             </li>
                             )
                         })
@@ -44,4 +50,10 @@ class TrailList extends Component {
         )
     }
 }
-export default TrailList ; 
+const mapStateToProps = (state)=>{
+    console.log('trail list ',state);
+    return {
+        trailList:state.trailListReducer
+    }
+}
+export default connect(mapStateToProps)(TrailList) ; 

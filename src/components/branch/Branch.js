@@ -77,7 +77,7 @@ class Branch extends Component {
                 }
             }
         })
-        .then((err)=>{
+        .catch((err)=>{
             console.log(err)
         })
     }

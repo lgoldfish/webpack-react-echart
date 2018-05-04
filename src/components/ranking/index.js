@@ -55,7 +55,7 @@ class RankingMoudel extends Component {
                 usersCurrent:count.currentUsers,
                 usersHistory:count.historyUsers,
             })
-        }).then(error=>{
+        }).catch(error=>{
             console.log(error)
         })
     }

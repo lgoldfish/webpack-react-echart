@@ -3,4 +3,6 @@ const apiBranch = baseApi+"branchlibraries/branch";
 const apiBranchAll = baseApi+ "branchlibraries/all";
 const apiUsersCount = baseApi+ "branchlibraries/users";
 const apiBranchRank = baseApi +'/branchlibraries/top';
-export {apiBranch, apiBranchAll,apiUsersCount,apiBranchRank};
+const apiHeatmap = baseApi + 'branchlibraries/heatmap';
+const apiTraiList = baseApi +"branchlibraries/track";
+export {apiBranch, apiBranchAll,apiUsersCount,apiBranchRank,apiHeatmap,apiTraiList};

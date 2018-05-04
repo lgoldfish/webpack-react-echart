@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 const SHOW_TRAIL = 'show_trail';
 const HIDE_TRAIL = "hide_trail";
+const TRAI_LIST = "trail_list";
 // let showTrailAction = (state) => {
 //     return {
 //         type: SHOW_TRAIL,
@@ -14,7 +15,8 @@ const HIDE_TRAIL = "hide_trail";
 //     }
 // }
 const initialState = {
-    show: false
+    show: false,
+    traiList:[]
 }
 let showTrailReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -30,7 +32,18 @@ let showTrailReducer = (state = initialState, action) => {
             return state
     }
 }
+const initTrailList = []
+let trailListReducer = (state = initTrailList , action)=> {
+    switch(action.type){
+        case TRAI_LIST:{
+            return action.traiList
+        }
+        default:
+        return state;
+    }
+}
 const reducers = combineReducers({
-    showTrailReducer
+    showTrailReducer,
+    trailListReducer
 })
 export default reducers;

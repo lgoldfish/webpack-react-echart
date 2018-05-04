@@ -26,7 +26,7 @@ class Ranking extends Component {
             options.series[0].data = Array(sum.length).fill(sum[0]*1.1);
             options.series[1].data = sum;
             this.ranking.setOption(options);
-        }).then(error=>{
+        }).catch(error=>{
             console.log(error)
         })
     }

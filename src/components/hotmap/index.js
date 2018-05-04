@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import "../style.css";
 import Hotmap from "./Hotmap";
 import TrailShow from "./TrailShow";
+import {apiTraiList} from "../../config";
+import requset from "../../server";
 class HotmapMoudle extends Component {
     constructor(props) {
         super(props)
@@ -10,7 +12,7 @@ class HotmapMoudle extends Component {
         this.naviHistory = this.naviHistory.bind(this)
     }
     state = {
-        navi:'history'
+        navi:'current'
     }
     naviCurrent(){
         this.setState({
@@ -30,6 +32,22 @@ class HotmapMoudle extends Component {
     }
     handleInput(e){
         console.log(e.target.value)
+        console.log('this props',this.props)
+        this.setState({
+            traiByPhone:e.target.value
+        })
+    }
+    requsetTrail(){
+        requset(apiTraiList + "?phone=" + this.state.traiByPhone)
+        .then((traiList)=>{
+            this.props.dispatch({
+                type:"trail_list",
+                traiList:traiList
+            })
+        })
+        .then(error=>{
+            console.log(error)
+        })
     }
     componentDidMount(){
         console.log('redux props',this.props)
@@ -47,7 +65,7 @@ class HotmapMoudle extends Component {
                 {
                     navi==='history'?
                     <div className="trailSearch">
-                     <img src={require('../../asset/ic_search.png')} alt="search"/>
+                     <img onClick={this.requsetTrail.bind(this)} src={require('../../asset/ic_search.png')} alt="search"/>
                         <input type="text" onChange={this.handleInput.bind(this)}  placeholder="13914689223"/>
                     </div>:''
                 }

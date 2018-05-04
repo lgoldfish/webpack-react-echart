@@ -1,45 +1,21 @@
 {
-    "type": "FeatureCollection",
-    "features": [{
-            "type": "Feature",
-            "properties": {
-                "planar_graph": 3663076,
-                "hasTransitPoint": false
-            },
-            "geometry": {
-                "type": "LineString",
-                "coordinates": [
-                    [12757927.909199998, 4596834.234999999],
-                    [12757771.516199999, 4596596.0315000005]
-                ]
+    "Navi": {
+        "type": "FeatureCollection",
+        "features": [{
+                "geometry": {
+                    "coordinates": [
+                        [
+                            [12757927.909199998, 4596834.234999999],
+                            [12757771.516199999, 4596596.0315000005],
+                            [12758279.044799998, 4596801.309599999]
+                        ]
+                    ],
+                    "type": "MultiLineString"
+                },
+                "type": "Feature"
             }
-        }, {
-            "type": "Feature",
-            "properties": {
-                "planar_graph": 3663076,
-                "hasTransitPoint": false
-            },
-            "geometry": {
-                "type": "LineString",
-                "coordinates": [
-                    [12757771.516199999, 4596596.0315000005],
-                    [12758279.044799998, 4596801.309599999]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "planar_graph": 3663076,
-                "hasTransitPoint": false
-            },
-            "geometry": {
-                "type": "LineString",
-                "coordinates": [
-                    [12758279.044799998, 4596801.309599999],
-                    [12758378.615500003, 4596741.243500002]
-                ]
-            }
-        }
-    ]
+
+        ]
+
+    }
 }

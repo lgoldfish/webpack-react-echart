@@ -21,7 +21,7 @@ class BranchsAll extends Component {
             options.series[0].data = branchsall.nums;
             this.branchsall.setOption(options);
         })
-        .then(error=>{
+        .catch(error=>{
             console.log(error)
         })
     }
