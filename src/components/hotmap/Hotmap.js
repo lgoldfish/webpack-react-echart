@@ -4,14 +4,18 @@ import "../style.css";
 class Hotmap extends Component {
     constructor(props) {
         super(props)
+        this.timer = ""
     }
     componentDidMount() {
-        window.ngrMap = new NGRMap();
+        const ngrMap = new NGRMap();
         ngrMap.initMap();
         ngrMap.addHeatMapLayer();
-        // setInterval(()=>{
-        //     ngrMap.addHeatMapLayer();
-        // },1000*60)
+        this.timer = setInterval(()=>{
+            ngrMap.addHeatMapLayer();
+        },1000*60)
+    }
+    componentWillUnmount(){
+        this.timer && clearInterval(this.timer)
     }
     render() {
         return (

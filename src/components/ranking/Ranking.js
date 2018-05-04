@@ -6,13 +6,17 @@ import request from "../../server";
 class Ranking extends Component {
     constructor(props) {
         super(props)
+        this.timer = ""
     }
     componentDidMount() {
         this.ranking = echarts.init(this.refs.ranking)
         this.requestData();
-        setInterval(()=>{
+        this.timer = setInterval(()=>{
         this.requestData();
         },1000*60)
+    }
+    componentWillUnmount(){
+        this.timer && clearInterval(this.timer)
     }
     requestData(){
         request(apiBranchRank+"?type=hour").then(branchCount=>{

@@ -6,13 +6,17 @@ import request from "../../server";
 class HisRanking extends Component {
     constructor(){
         super()
+        this.timer = ""
     }
     componentDidMount(){
         this.ranking = echarts.init(this.refs.ranking)
         this.requestData();
-        setInterval(()=>{
+        this.timer = setInterval(()=>{
         this.requestData();
         },1000*60)
+    }
+    componentWillUnmount(){
+        this.timer && clearInterval(this.timer)
     }
     requestData(){
         request(apiBranchRank+"?type=day").then(branchCount=>{
@@ -27,7 +31,6 @@ class HisRanking extends Component {
             options.series[0].data = Array(sum.length).fill(sum[0]*1.1);
             options.series[1].data = sum;
             this.ranking.setOption(options);
-            console.log(libraries,sum)
         }).then(error=>{
             console.log(error)
         })

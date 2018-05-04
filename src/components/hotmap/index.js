@@ -31,26 +31,17 @@ class HotmapMoudle extends Component {
         })
     }
     handleInput(e){
-        console.log(e.target.value)
-        console.log('this props',this.props)
         this.setState({
             traiByPhone:e.target.value
         })
     }
     requsetTrail(){
-        requset(apiTraiList + "?phone=" + this.state.traiByPhone)
-        .then((traiList)=>{
-            this.props.dispatch({
-                type:"trail_list",
-                traiList:traiList
-            })
-        })
-        .then(error=>{
-            console.log(error)
+        this.props.dispatch({
+            type:"getTraiByPhone",
+            phone:this.state.traiByPhone
         })
     }
     componentDidMount(){
-        console.log('redux props',this.props)
     }
     render(){
         const {navi} = this.state;

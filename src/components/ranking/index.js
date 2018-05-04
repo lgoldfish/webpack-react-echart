@@ -29,7 +29,6 @@ class RankingMoudel extends Component {
         })
     }
     componentWillReceiveProps(nextProps){
-        console.log('ranking nextProps redux',nextProps)
         if(nextProps.trailShow){
             this.setState({
                 trailShow:true

@@ -1,32 +1,39 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {apiTraiList} from "../../config";
+import requset from "../../server";
 class TrailList extends Component {
     constructor(){
         super()
+        this.timer = ""
     }
     state={
         trailList:[
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
-            // {date:"2018/3/23",time:'15:30',site:"A2馆"},
         ]
     }
     componentDidMount(){
 
     }
+    componentWillUnmount() {
+        this.timer && clearInterval(this.timer)
+    }
     componentWillReceiveProps(nextProps){
-        const {trailList} = nextProps;
-        nextProps.trailList && this.setState({
+        if(this.props.phone!=nextProps.phone){
+            this.requsetTraiList(nextProps)
+            this.timer = setInterval(()=>{
+                this.requsetTraiList(nextProps)
+            },1000*60)
+        }
+    }
+    requsetTraiList(nextProps){
+        requset(apiTraiList + "?phone=" + nextProps.phone)
+        .then((trailList)=>{
+           this.setState({
             trailList
+           })
+        })
+        .then(error=>{
+            console.log(error)
         })
     }
     render(){
@@ -51,9 +58,9 @@ class TrailList extends Component {
     }
 }
 const mapStateToProps = (state)=>{
-    console.log('trail list ',state);
     return {
-        trailList:state.trailListReducer
+        trailList:state.trailListReducer,
+        phone:state.getTraiByPhoneReducer
     }
 }
 export default connect(mapStateToProps)(TrailList) ; 

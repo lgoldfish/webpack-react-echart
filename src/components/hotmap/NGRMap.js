@@ -1,9 +1,11 @@
-import {apiHeatmap} from "../../config";
+import {apiHeatmap,apiTraiNavi} from "../../config";
 import request from "../../server";
 class NGRMap  {
   constructor() {
     this.appkey = "0fd2ce4e3da444b3bc1d2fea3bda5c25";
     this.zoom = 15.9;
+    this.heatmapLayer = "";
+    this.trailLayer = "";
   }
   initMap() {
     this.map = new NGR.View('map', {
@@ -49,12 +51,6 @@ class NGRMap  {
               onsuccess: JSON.parse
           }).then((style)=> { 
             this.style = style;
-                // NGR.IO.fetch({
-                //   url:"./hotmap/trail.json",
-                //   onsuccess:JSON.parse
-                // })
-                // .then(trail=>{
-                  // console.log('trail is',trail)
                   this.map.clear();
                   const frame = NGR.featureLayer(layerInfo, { 
                     layerType: 'Frame',
@@ -67,18 +63,11 @@ class NGRMap  {
                   const collision = NGR.layerGroup.collision({
                     margin: 3
                 });
-                  // const trailLayer =  NGR.featureLayer(trail,{
-                  //   layerType:"Navi",
-                  //   styleConfig:style
-                  // })
-                  // console.log('tailLayer is',trailLayer)
                   this.map.addLayer(frame);
                   this.map.addLayer(area);
                   this.map.addLayer(collision);
-                  // this.map.addLayer(trailLayer)
                   this.map.render(); 
                   this._handleOnclik(area);
-                // })
           });
       
   }
@@ -93,46 +82,49 @@ class NGRMap  {
     this.map._core_map.whenReady(()=>{
       request(apiHeatmap)
       .then((heatmap=>{
-        const heatmapLayer = NGR.featureLayer(heatmap,{
+        if(this.heatmapLayer){
+          this.map.removeFeatureLayer(this.heatmapLayer)
+          this.heatmapLayer = "";
+        }
+        this.heatmapLayer = NGR.featureLayer(heatmap,{
           layerType:"Heatmap",
           styleConfig:this.style
         })
 
-        this.map.addLayer(heatmapLayer);
+        this.map.addLayer(this.heatmapLayer);
+        window.map = this.map;
+        window.heatmapLayer = this.heatmapLayer;
       }))
       .catch(error=>{
         console.log(error)
       })
-      // NGR.IO.fetch({
-      //   url:"./hotmap/heatmap.json",
-      //   onsuccess:JSON.parse
-      // }).then(heatmap=>{
-      //   const heatmapLayer = NGR.featureLayer(heatmap,{
-      //     layerType:"Heatmap",
-      //     styleConfig:this.style
-      //   })
-
-      //   this.map.addLayer(heatmapLayer);
-      // })
     })
   }
-  addTrailLine(){
+  addTrailLine(phone){
     this.map._core_map.whenReady(()=>{
-      NGR.IO.fetch({
-        url:"./hotmap/trail.json",
-        onsuccess:JSON.parse
-      }).then(trail=>{
-        try {
-          const trailLayer = NGR.featureLayer(trail,{
-            layerType:"Navi",
-            styleConfig:this.style
-          })
-          this.map.addLayer(trailLayer)
-        } catch (error) {
-          console.error("error",error)
-        }
-        
-      })
+         request(apiTraiNavi+"?phone="+phone)
+            .then(res=>{
+                const {navi} = res;
+                const trail = {
+                  Navi:navi
+                }
+                try {
+                  if(this.trailLayer){
+                    this.map.removeFeatureLayer(this.trailLayer)
+                    this.trailLayer = ""
+                  }
+                  this.trailLayer = NGR.featureLayer(trail,{
+                    layerType:"Navi",
+                    styleConfig:this.style
+                  })
+                  this.map.addLayer(this.trailLayer)
+                } catch (error) {
+                  console.error("error",error)
+                }
+            })
+            .catch(error=>{
+                console.log(error)
+            })
     })
   }
 }

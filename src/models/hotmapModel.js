@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 const SHOW_TRAIL = 'show_trail';
 const HIDE_TRAIL = "hide_trail";
 const TRAI_LIST = "trail_list";
+const TRAI_bY_PHONE= "getTraiByPhone";
 // let showTrailAction = (state) => {
 //     return {
 //         type: SHOW_TRAIL,
@@ -42,8 +43,18 @@ let trailListReducer = (state = initTrailList , action)=> {
         return state;
     }
 }
+const initTraiByphone = ''
+const getTraiByPhoneReducer = (state = initTraiByphone,action)=>{
+    switch(action.type){
+        case TRAI_bY_PHONE:
+        return action.phone
+        default:
+        return initTraiByphone;
+    }
+}
 const reducers = combineReducers({
     showTrailReducer,
-    trailListReducer
+    trailListReducer,
+    getTraiByPhoneReducer
 })
 export default reducers;

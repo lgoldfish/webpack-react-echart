@@ -6,13 +6,17 @@ import {apiBranchAll} from "../../config";
 class BranchsAll extends Component {
     constructor(props){
         super(props)
+        this.timer = ""
     }
     componentDidMount(){
         this.branchsall = echarts.init(this.refs.branchall);
         this.requestData()
-        setInterval(()=>{
+        this.timer = setInterval(()=>{
             this.requestData()
         },1000*60) 
+    }
+    componentWillUnmount(){
+        this.timer && clearInterval(this.timer)
     }
     requestData(){
         request(apiBranchAll+"?type=hour")
