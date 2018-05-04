@@ -97,24 +97,30 @@ class NGRMap  {
           layerType:"Heatmap",
           styleConfig:this.style
         })
+
         this.map.addLayer(heatmapLayer);
       })
     })
   }
   addTrailLine(){
     this.map._core_map.whenReady(()=>{
-      const routineLayer = NGR.layerGroup();
-      routineLayer.addTo(this.map);
       NGR.IO.fetch({
         url:"./hotmap/trail.json",
         onsuccess:JSON.parse
       }).then(trail=>{
         console.log('trail',trail)
-        const trailLayer = NGR.featureLayer(trail,{
-          layerType:"Navi",
-          styleConfig:this.style
-        })
-        routineLayer.addLayer(trailLayer)
+        console.log('style',this.style)
+        try {
+          const trailLayer = NGR.featureLayer(trail,{
+            layerType:"Navi",
+            styleConfig:this.style
+          })
+          console.log('traiLayer',trailLayer);
+          // this.map.addLayer(trailLayer)
+        } catch (error) {
+          console.error("error",error)
+        }
+        
       })
     })
   }

@@ -6,6 +6,7 @@ class HisHotmap extends Component {
     }
     componentDidMount(){
         const ngrMap = new NGRMap();
+        window.ngrMap = ngrMap;
         ngrMap.initMap();
         ngrMap.addTrailLine();
     }
