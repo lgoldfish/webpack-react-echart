@@ -86,7 +86,7 @@ class RankingMoudel extends Component {
                     </div>
                     <div className="ranking_bottom">
                     <img src={require("../../asset/logo.png")} alt="logo"/>
-                        石家庄国际会展中心
+                        *********
                     </div>
                 </div>
             </div>
